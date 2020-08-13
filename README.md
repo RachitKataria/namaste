@@ -1,2 +1,3 @@
 # namaste
-Chrome extension that provides randomized yoga videos
+
+A Chrome extension that surfaces randomized yoga videos  
