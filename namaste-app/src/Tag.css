@@ -1,0 +1,22 @@
+.button {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 5px 15px 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+    width: auto;
+    font-family: 'Montserrat';
+}
+  
+.button:hover {
+    background-color: #f1f1f1;
+}
+
+.button:focus {
+    outline: 0;
+}
