@@ -11,7 +11,8 @@ function SavedPage(props) {
   const [selectedFilters, setSelectedFilters] = React.useState([]);
 
   React.useEffect(() => {
-    getVideosForSelectedFilters(selectedFilters);
+    const results = getVideosForSelectedFilters(selectedFilters);
+    setFilteredVideoResults(results);
   }, [selectedFilters, props]);
 
   function onFilterClick(filter) {

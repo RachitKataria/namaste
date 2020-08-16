@@ -30,6 +30,7 @@ function Explore(props) {
   const [videoId, setVideoId] = React.useState("");
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
+  const [favorited, setFavorited] = React.useState(false);
 
   const [videoURL, setVideoURL] = React.useState("");
   // Disable randomize button
@@ -93,8 +94,10 @@ function Explore(props) {
     }
   }
 
-  const [favorited, setFavorited] = React.useState(false);
-  const heartImage = favorited ? heartFilled : heartEmpty;
+  function calculatedHeartImage() {
+    const favorited = savedVideos.has(videoId);
+    return favorited ? heartFilled : heartEmpty;
+  }
 
   function toggleImage() {
     const updatedFavorited = !favorited;
@@ -154,7 +157,7 @@ function Explore(props) {
               <img
                 id="heartImage"
                 onClick={toggleImage}
-                src={heartImage}
+                src={calculatedHeartImage()}
                 alt="new"
               />
             </div>
