@@ -23,8 +23,13 @@ function Explore() {
   };
 
   async function randomizeYoutube() {
+    console.log("RANDOMIZE");
     // Query youtube API
     setLoadingVideo(true);
+
+    // Reset video URL
+    setVideoURL("");
+
     const response = await youtube.get("/search", {
       params: {
         part: "snippet",
@@ -33,9 +38,10 @@ function Explore() {
         type: "video",
         videoDuration: videoDurationTitle,
         videoEmbeddable: "true",
-        key: "AIzaSyDqCoxJPRW8C4B5fDNOBmL_GYetHk8THcs",
+        key: "AIzaSyBpilbN3suBcPmg5wueRpZrvJsvpsUvvNQ",
       },
     });
+
     setLoadingVideo(false);
     if (response != null) {
       console.log(response);
@@ -44,6 +50,8 @@ function Explore() {
       );
       const videoData = response.data.items[randVideoIndex];
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
+    } else {
+      console.log("Response unsuccessful");
     }
   }
 
@@ -59,11 +67,19 @@ function Explore() {
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
+        ) : loadingVideo ? (
+          <div id="videoSpinner">
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border m-4" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
         ) : null}
       </div>
       <div id="body_region">
         <div className="dropdownContainer">
-          <h2>BODY REGION</h2>
+          <h3>BODY REGION</h3>
           <DropdownButton id="defaultButton" title={bodyRegionTitle}>
             <Dropdown.Item>
               <div onClick={(e) => setBodyRegionTitle("NECK")}>NECK</div>
@@ -86,7 +102,7 @@ function Explore() {
       </div>
       <div id="video_duration">
         <div className="dropdownContainer">
-          <h2>VIDEO DURATION</h2>
+          <h3>VIDEO DURATION</h3>
           <DropdownButton id="defaultButton" title={videoDurationTitle}>
             <Dropdown.Item>
               <div onClick={(e) => setVideoDurationTitle("SHORT")}>SHORT</div>
