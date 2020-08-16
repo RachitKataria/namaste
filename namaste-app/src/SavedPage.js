@@ -9,7 +9,6 @@ function SavedPage(props) {
   const { savedVideos, videosToMetadata, tagsToVideos } = props.store;
   // initialize filters to none
   const [selectedFilters, setSelectedFilters] = React.useState([]);
-  const [filteredVideoResults, setFilteredVideoResults] = React.useState({});
 
   React.useEffect(() => {
     getVideosForSelectedFilters(selectedFilters);
@@ -70,15 +69,15 @@ function SavedPage(props) {
       resultsToShow[videoId] = videoMetaData;
     });
 
-    // Set the new state to the filtered video results
-    setFilteredVideoResults(resultsToShow);
+    return resultsToShow;
   }
 
+  const filtersToShow = getVideosForSelectedFilters(selectedFilters);
   return (
     <div className="page">
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
-      {Object.keys(filteredVideoResults).map((key) => (
-        <SavedCard videoId={key} videoData={filteredVideoResults[key]} liked />
+      {Object.keys(filtersToShow).map((key) => (
+        <SavedCard videoId={key} videoData={filtersToShow[key]} liked />
       ))}
     </div>
   );
