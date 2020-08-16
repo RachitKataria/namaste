@@ -3,10 +3,9 @@ import { observer } from "mobx-react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Explore from "./Explore";
-import Save from "./Save";
+import SavedPage from "./SavedPage";
 
 function HomePage({ keywordStore }) {
-  console.log("HOME PAGE");
   const [initialized, setInitialized] = React.useState(false);
 
   React.useEffect(() => {
@@ -29,7 +28,9 @@ function HomePage({ keywordStore }) {
             <Explore />
           </Tab>
           <Tab eventKey="saved" title="SAVED">
-            <Save />
+            <SavedPage
+              supportedFilters={["Neck", "Upper Back", "Lower Back", "Abs"]}
+            />
           </Tab>
         </Tabs>
       </div>
