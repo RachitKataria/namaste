@@ -12,11 +12,34 @@ body {
 #body_region {
   float: left;
   width: 50%;
+  margin-top: 50px;
+  padding-left: 150px;
 }
 
 #video_duration {
-  float: right;
+  margin-top: 50px;
   width: 50%;
+  float: right;
+  padding-right: 150px;
+  margin-bottom: 40px;
+}
+
+#videoTextMetadata {
+  margin-top: 10px;
+  float: left;
+  width: 90%;
+}
+
+#videoImgMetadata {
+  float: right;
+  width: 10%;
+}
+
+#heartImage {
+  margin-top: 10px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
 }
 
 #randomizeButton {
@@ -40,8 +63,6 @@ body {
 #youtubeVideo {
   width: 560px;
   margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
 }
 
 #defaultButton {
@@ -93,4 +114,8 @@ body {
 
   margin-left: 16px;
   background: #ffbe5b;
+}
+
+#tabRow {
+  margin-bottom: 50px;
 }

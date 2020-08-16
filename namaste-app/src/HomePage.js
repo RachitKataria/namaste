@@ -25,35 +25,41 @@ function HomePage({ keywordStore }) {
 
   return (
     <div className="page">
-      <h1>Namaste</h1>
+      <div style={{ textAlign: "center" }}>
+        <h1>Namaste</h1>
+      </div>
       <div>
         <Tab.Container id="tabs" activeKey={activeTab}>
-          <Row className="row justify-content-center">
-            <div className="navItem">
-              <Nav.Item>
-                <Nav.Link
-                  eventKey="explore"
-                  onClick={() => setActiveTab("explore")}
-                >
-                  EXPLORE
-                </Nav.Link>
-              </Nav.Item>
-              {activeTab == "explore" ? (
-                <div className="bottomBar"></div>
-              ) : null}
-            </div>
-            <div className="navItem">
-              <Nav.Item>
-                <Nav.Link
-                  eventKey="saved"
-                  onClick={() => setActiveTab("saved")}
-                >
-                  SAVED
-                </Nav.Link>
-              </Nav.Item>
-              {activeTab == "saved" ? <div className="bottomBar"></div> : null}{" "}
-            </div>
-          </Row>
+          <div id="tabRow">
+            <Row className="row justify-content-center">
+              <div className="navItem">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="explore"
+                    onClick={() => setActiveTab("explore")}
+                  >
+                    EXPLORE
+                  </Nav.Link>
+                </Nav.Item>
+                {activeTab == "explore" ? (
+                  <div className="bottomBar"></div>
+                ) : null}
+              </div>
+              <div className="navItem">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="saved"
+                    onClick={() => setActiveTab("saved")}
+                  >
+                    SAVED
+                  </Nav.Link>
+                </Nav.Item>
+                {activeTab == "saved" ? (
+                  <div className="bottomBar"></div>
+                ) : null}{" "}
+              </div>
+            </Row>
+          </div>
           <Row>
             <Tab.Content>
               <Tab.Pane eventKey="explore">
