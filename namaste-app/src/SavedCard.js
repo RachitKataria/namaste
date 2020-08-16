@@ -31,17 +31,12 @@ function SavedCard(props) {
   savedTagsToDisplayTags["lowerback"] = "Lower Back";
   savedTagsToDisplayTags["abs"] = "Abs";
 
-  // const [favorited, setFavorited] = React.useState(liked);
-
   const videoTitle = videoData.name;
   const videoChannel = videoData.channelName;
   const videoThumbnail = videoData.thumbNail;
   const tags = videoData.tags;
 
-  function toggleImage() {
-    // const updatedFavorited = !favorited;
-    // setFavorited(updatedFavorited);
-
+  function setVideoUnsaved() {
     const {
       savedVideosUpdated,
       videosToMetadataUpdated,
@@ -100,7 +95,12 @@ function SavedCard(props) {
         ))}
       </div>
       <div class="search-heart">
-        <img onClick={toggleImage} src={heartFilled} class="heart" alt="new" />
+        <img
+          onClick={setVideoUnsaved}
+          src={heartFilled}
+          class="heart"
+          alt="new"
+        />
       </div>
     </div>
   );
