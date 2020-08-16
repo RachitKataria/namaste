@@ -6,18 +6,31 @@ import heartEmpty from "./img/heart-empty.png";
 import "./SavedCard.css";
 
 // video.thumbNail = URL of image
+// video.name
+// video.channelName
 // categories = array of string categories to display as pills
-function SavedCard({ video, categories, liked }) {
+function SavedCard({ video, liked }) {
   const [favorited, setFavorited] = React.useState(liked);
 
-  const videoName =
-    "Yoga For Complete Beginners - 20 Minute Home Yoga Workout!";
-  const channelName = "Yoga With Adriene";
-  const videoDuration = "05:45";
+  const videoName = video.name;
+  const channelName = video.channelName;
+  const tags = convertSavedTagsToDisplayTags(video.tags);
 
   function toggleImage() {
     console.log("toggled ", favorited);
     setFavorited(!favorited);
+  }
+
+  function convertSavedTagsToDisplayTags(tags) {
+    const displayTags = [];
+    const savedToDisplayedTagsMap = JSON.parse(
+      localStorage.getItem("savedTagsToDisplayTags")
+    );
+    tags.forEach((tag) => {
+      displayTags.push(savedToDisplayedTagsMap[tag]);
+    });
+
+    return displayTags;
   }
 
   const heartImage = favorited ? heartFilled : heartEmpty;
@@ -32,10 +45,10 @@ function SavedCard({ video, categories, liked }) {
         </span>
         <br />
         <span class="channelName">{channelName}</span>
-        <span class="videoDuration">{videoDuration}</span>
         <br />
-        <Tag active isClickable={false} text="Shoulders" />
-        <Tag active isClickable={false} text="Neck" />
+        {tags.map((tag) => (
+          <Tag active isClickable={false} text={tag} />
+        ))}
       </div>
       <div class="search-heart">
         <img onClick={toggleImage} src={heartImage} class="heart" alt="new" />
