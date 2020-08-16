@@ -1,25 +1,31 @@
 import { observable, action, decorate } from "mobx";
 class KeywordStore {
-  keyword = "";
-  videoDuration = "";
-  bodyRegion = "";
+  savedVideos = new Set();
+  videosToMetadata = new Map();
+  tagsToVideos = {
+    neck: [],
+    upperback: [],
+    lowerback: [],
+    abs: [],
+  };
 
-  setKeyword(keyword) {
-    this.keyword = keyword;
+  setSavedVideos(savedVideos) {
+    this.savedVideos = savedVideos;
   }
-  setVideoDuration(videoDuration) {
-    this.videoDuration = videoDuration;
+  setVideosToMetadata(videosToMetadata) {
+    this.videosToMetadata = videosToMetadata;
   }
-  setBodyRegion(bodyRegion) {
-    this.bodyRegion = bodyRegion;
+  setTagsToVideos(tagsToVideos) {
+    this.tagsToVideos = tagsToVideos;
   }
 }
-KeywordStore = decorate(KeywordStore, {
-  keyword: observable,
-  videoDuration: observable,
-  bodyRegion: observable,
-  setKeyword: action,
-  setVideoDuration: action,
-  setBodyRegion: action,
+
+decorate(KeywordStore, {
+  savedVideos: observable,
+  videosToMetadata: observable,
+  tagsToVideos: observable,
+  setSavedVideos: action.bound,
+  setVideosToMetadata: action.bound,
+  setTagsToVideos: action.bound,
 });
-export { KeywordStore };
+export default new KeywordStore();

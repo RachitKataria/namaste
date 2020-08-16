@@ -10,6 +10,12 @@ import "./SavedCard.css";
 // video.channelName
 // categories = array of string categories to display as pills
 function SavedCard({ video, liked }) {
+  const savedTagsToDisplayTags = new Map();
+  savedTagsToDisplayTags["neck"] = "Neck";
+  savedTagsToDisplayTags["upperback"] = "Upper Back";
+  savedTagsToDisplayTags["lowerback"] = "Lower Back";
+  savedTagsToDisplayTags["abs"] = "Abs";
+
   const [favorited, setFavorited] = React.useState(liked);
 
   const videoName = video.name;
@@ -23,11 +29,8 @@ function SavedCard({ video, liked }) {
 
   function convertSavedTagsToDisplayTags(tags) {
     const displayTags = [];
-    const savedToDisplayedTagsMap = JSON.parse(
-      localStorage.getItem("savedTagsToDisplayTags")
-    );
     tags.forEach((tag) => {
-      displayTags.push(savedToDisplayedTagsMap[tag]);
+      displayTags.push(savedTagsToDisplayTags[tag]);
     });
 
     return displayTags;

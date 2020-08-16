@@ -1,20 +1,33 @@
 import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import youtube from "./youtube";
 import heartFilled from "./img/heart-filled.png";
 import heartEmpty from "./img/heart-empty.png";
 
-function Explore() {
+function Explore(props) {
+  const {
+    savedVideos,
+    videosToMetadata,
+    tagsToVideos,
+    setSavedVideos,
+    setVideosToMetadata,
+    setTagsToVideos,
+  } = props.store;
+  console.log(props.store);
+
   const [loadingVideo, setLoadingVideo] = React.useState(false);
   const defaultTitle = "SELECT";
+  const [videoThumbnail, setVideoThumbnail] = React.useState("");
+
   const [bodyRegionTitle, setBodyRegionTitle] = React.useState(defaultTitle);
   const [videoDurationTitle, setVideoDurationTitle] = React.useState(
     defaultTitle
   );
+  const [videoId, setVideoId] = React.useState("");
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
 
@@ -32,6 +45,7 @@ function Explore() {
     return str
       .replace(/&amp;/g, "&")
       .replace(/&lt;/g, "<")
+      .replace(/&Quotl;/g, '"')
       .replace(/&gt;/g, ">");
   };
 
@@ -51,21 +65,29 @@ function Explore() {
         type: "video",
         videoDuration: videoDurationTitle,
         videoEmbeddable: "true",
-        key: "AIzaSyBpilbN3suBcPmg5wueRpZrvJsvpsUvvNQ",
+        key: "AIzaSyBFeYKd159v8xfoPSJfuctOYwKlJ8Z8Gnk",
       },
     });
 
     setLoadingVideo(false);
-    console.log(response);
     if (response != null) {
       console.log(response);
       const randVideoIndex = Math.floor(
         Math.random() * response.data.items.length
       );
       const videoData = response.data.items[randVideoIndex];
+
+      // Set video id
+      setVideoId(videoData.id.videoId);
+
+      // Set thumbnail
+      setVideoThumbnail(videoData.snippet.thumbnails.default);
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
+
+      const videoIsSaved = savedVideos.has(videoData.id.videoId);
+      setFavorited(videoIsSaved);
     } else {
       console.log("Response unsuccessful");
     }
@@ -74,9 +96,39 @@ function Explore() {
   const [favorited, setFavorited] = React.useState(false);
   const heartImage = favorited ? heartFilled : heartEmpty;
 
+  const parsedTag = (tag) => {
+    const removeSpaces = tag.split(" ").join("");
+    const lowerCase = removeSpaces.toLowerCase();
+    return lowerCase;
+  };
+
   function toggleImage() {
-    console.log("toggled ", favorited);
-    setFavorited(!favorited);
+    const updatedFavorited = !favorited;
+    setFavorited(updatedFavorited);
+
+    // Update saved states
+    if (updatedFavorited) {
+      let savedVideosUpdated = savedVideos;
+      savedVideosUpdated.add(videoId);
+      setSavedVideos(savedVideosUpdated);
+
+      const tag = parsedTag(bodyRegionTitle);
+
+      let videosToMetadataUpdated = videosToMetadata;
+      videosToMetadataUpdated[videoId] = {
+        channelName: videoChannel,
+        tags: [parsedTag(bodyRegionTitle)],
+        thumbNail: videoThumbnail,
+        name: videoTitle,
+      };
+      setVideosToMetadata(videosToMetadataUpdated);
+
+      let tagsToVideosUpdated = tagsToVideos;
+      tagsToVideosUpdated[tag].push(videoId);
+      setTagsToVideos(tagsToVideosUpdated);
+    } else {
+      // No-op for now
+    }
   }
 
   return (
@@ -175,4 +227,4 @@ function Explore() {
     </div>
   );
 }
-export default observer(Explore);
+export default inject("store")(observer(Explore));

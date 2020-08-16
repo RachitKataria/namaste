@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
 import SavedCard from "./SavedCard";
 import FilterBar from "./FilterBar";
+import { observer, inject } from "mobx-react";
 
 // supportedFilters is an array
-function SavedPage({ supportedFilters }) {
+function SavedPage(props) {
+  const supportedFilters = props.supportedFilters;
+  const { savedVideos, videosToMetadata, tagsToVideos } = props.store;
   // initialize filters to none
   const [selectedFilters, setSelectedFilters] = React.useState([]);
   const [filteredVideoResults, setFilteredVideoResults] = React.useState([]);
 
   React.useEffect(() => {
+    console.log("saved vids: ", savedVideos);
+
     getVideosForSelectedFilters(selectedFilters);
-  }, [selectedFilters]);
+  }, [selectedFilters, props]);
 
   function onFilterClick(filter) {
     const newFilters = selectedFilters;
@@ -28,18 +33,16 @@ function SavedPage({ supportedFilters }) {
 
   // Get a video metadata array for the inputted filters
   function getVideosForSelectedFilters(selectedFilters) {
+    console.log(props.store);
+
     // If we haven't selected any filters, show all videos
     if (selectedFilters.length === 0) {
       selectedFilters = supportedFilters;
     }
 
-    const savedVideos = new Set(
-      JSON.parse(localStorage.getItem("savedVideos"))
-    );
-
     // Map of all tags to videos from localstorage
-    const tagToVideoIdMap = JSON.parse(localStorage.getItem("tagToVideoIdMap"));
-
+    const tagToVideoIdMap = tagsToVideos;
+    console.log("tag to vid map: ", tagToVideoIdMap);
     const videoResultIdSet = new Set();
     const cleanedSelectedFilters = [];
 
@@ -55,6 +58,7 @@ function SavedPage({ supportedFilters }) {
       // If the current tag is one that we should show, add it to the result ID set
       if (cleanedSelectedFilters.includes(key)) {
         const videoIdValues = tagToVideoIdMap[key];
+        console.log("vid id values: ", videoIdValues);
 
         // videoValues is an array. Add all of them to the video set
         videoIdValues.forEach((videoId) => {
@@ -66,9 +70,7 @@ function SavedPage({ supportedFilters }) {
       }
     });
 
-    const idToVideoMetaMap = JSON.parse(
-      localStorage.getItem("idToVideoMetaMap")
-    );
+    const idToVideoMetaMap = videosToMetadata;
 
     // Build the video metadata map that we pass into the SavedCard to render video info
     const resultsToShow = [];
@@ -77,6 +79,8 @@ function SavedPage({ supportedFilters }) {
       const videoMetaData = idToVideoMetaMap[videoId];
       resultsToShow.push(videoMetaData);
     });
+
+    console.log("results to show: ", resultsToShow);
 
     // Set the new state to the filtered video results
     setFilteredVideoResults(resultsToShow);
@@ -96,4 +100,4 @@ function SavedPage({ supportedFilters }) {
   );
 }
 
-export default SavedPage;
+export default inject("store")(observer(SavedPage));
