@@ -9,11 +9,14 @@ function SavedPage(props) {
   const { savedVideos, videosToMetadata, tagsToVideos } = props.store;
   // initialize filters to none
   const [selectedFilters, setSelectedFilters] = React.useState([]);
+  const [videoURL, setVideoURL] = React.useState("");
+  const [videoTitle, setVideoTitle] = React.useState("");
+  const [videoChannel, setVideoChannel] = React.useState("");
 
-  React.useEffect(() => {
-    const results = getVideosForSelectedFilters(selectedFilters);
-    setFilteredVideoResults(results);
-  }, [selectedFilters, props]);
+  // React.useEffect(() => {
+  //   const results = getVideosForSelectedFilters(selectedFilters);
+  //   setSelectedFilters(results);
+  // }, [selectedFilters, props]);
 
   function onFilterClick(filter) {
     const newFilters = selectedFilters;
@@ -73,12 +76,44 @@ function SavedPage(props) {
     return resultsToShow;
   }
 
+  function displayVideo(videoId, videoData) {
+    console.log("clicked saved video");
+
+    setVideoURL("https://www.youtube.com/embed/" + videoId);
+    setVideoTitle(videoData.name);
+    setVideoChannel(videoData.channelName);
+
+    // Scroll to top of screen
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
+
   const filtersToShow = getVideosForSelectedFilters(selectedFilters);
   return (
-    <div className="page">
+    <div id="savedPage">
+      {videoURL != "" && (
+        <div id="youtubeVideo">
+          <iframe
+            width="560"
+            height="315"
+            src={videoURL}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+          <div id="videoTextMetadata">
+            <span id="videoTitle">{videoTitle}</span>
+            <br />
+            <span id="channelTitle">{videoChannel}</span>
+          </div>
+        </div>
+      )}
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
       {Object.keys(filtersToShow).map((key) => (
-        <SavedCard videoId={key} videoData={filtersToShow[key]} liked />
+        <SavedCard
+          onClick={() => displayVideo(key, filtersToShow[key])}
+          videoId={key}
+          videoData={filtersToShow[key]}
+        />
       ))}
     </div>
   );

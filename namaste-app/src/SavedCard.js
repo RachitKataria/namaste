@@ -23,6 +23,7 @@ function SavedCard(props) {
   const videoId = props.videoId;
   const videoData = props.videoData;
   const liked = props.liked;
+  const onClick = props.onClick;
 
   const savedTagsToDisplayTags = new Map();
   savedTagsToDisplayTags["neck"] = "Neck";
@@ -30,7 +31,7 @@ function SavedCard(props) {
   savedTagsToDisplayTags["lowerback"] = "Lower Back";
   savedTagsToDisplayTags["abs"] = "Abs";
 
-  const [favorited, setFavorited] = React.useState(liked);
+  // const [favorited, setFavorited] = React.useState(liked);
 
   const videoTitle = videoData.name;
   const videoChannel = videoData.channelName;
@@ -38,15 +39,15 @@ function SavedCard(props) {
   const tags = videoData.tags;
 
   function toggleImage() {
-    const updatedFavorited = !favorited;
-    setFavorited(updatedFavorited);
+    // const updatedFavorited = !favorited;
+    // setFavorited(updatedFavorited);
 
     const {
       savedVideosUpdated,
       videosToMetadataUpdated,
       tagsToVideosUpdated,
     } = toggleSave(
-      updatedFavorited,
+      false,
       savedVideos,
       videosToMetadata,
       tagsToVideos,
@@ -82,9 +83,8 @@ function SavedCard(props) {
     return displayTags;
   }
 
-  const heartImage = favorited ? heartFilled : heartEmpty;
   return (
-    <div class="search-card">
+    <div onClick={onClick} class="search-card">
       <div class="search-thumbnail">
         <img src={videoThumbnail} alt="new" />
       </div>
@@ -100,7 +100,7 @@ function SavedCard(props) {
         ))}
       </div>
       <div class="search-heart">
-        <img onClick={toggleImage} src={heartImage} class="heart" alt="new" />
+        <img onClick={toggleImage} src={heartFilled} class="heart" alt="new" />
       </div>
     </div>
   );
