@@ -29,12 +29,14 @@
 }
 
 .search-card-details {
-  display: inline-block;
-  margin-left: 10px;
+    display: inline-block;
+    margin-left: 10px;
+    height: auto;
 }
 
 .search-thumbnail {
-  display: inline-block;
+    display: inline-block;
+    height: auto;
 }
 
 .heart {
@@ -48,12 +50,14 @@
 }
 
 .search-heart {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: #eee;
-  position: relative;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    text-align: center;
+    float: right;
+    width: 50px;
+    height: auto;
 }
 
 .search-heart:hover {
