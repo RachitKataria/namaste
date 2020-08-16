@@ -23,6 +23,7 @@ function Explore() {
   };
 
   async function randomizeYoutube() {
+    console.log("RANDOMIZe");
     // Query youtube API
     setLoadingVideo(true);
     const response = await youtube.get("/search", {
@@ -33,7 +34,7 @@ function Explore() {
         type: "video",
         videoDuration: videoDurationTitle,
         videoEmbeddable: "true",
-        key: "AIzaSyDqCoxJPRW8C4B5fDNOBmL_GYetHk8THcs",
+        key: "AIzaSyBpilbN3suBcPmg5wueRpZrvJsvpsUvvNQ",
       },
     });
     setLoadingVideo(false);
