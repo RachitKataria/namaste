@@ -9,11 +9,9 @@ function SavedPage(props) {
   const { savedVideos, videosToMetadata, tagsToVideos } = props.store;
   // initialize filters to none
   const [selectedFilters, setSelectedFilters] = React.useState([]);
-  const [filteredVideoResults, setFilteredVideoResults] = React.useState([]);
+  const [filteredVideoResults, setFilteredVideoResults] = React.useState({});
 
   React.useEffect(() => {
-    console.log("saved vids: ", savedVideos);
-
     getVideosForSelectedFilters(selectedFilters);
   }, [selectedFilters, props]);
 
@@ -26,15 +24,11 @@ function SavedPage(props) {
     } else {
       newFilters.push(filter);
     }
-
-    console.log("filters ", newFilters);
     setSelectedFilters([...newFilters]);
   }
 
   // Get a video metadata array for the inputted filters
   function getVideosForSelectedFilters(selectedFilters) {
-    console.log(props.store);
-
     // If we haven't selected any filters, show all videos
     if (selectedFilters.length === 0) {
       selectedFilters = supportedFilters;
@@ -42,7 +36,6 @@ function SavedPage(props) {
 
     // Map of all tags to videos from localstorage
     const tagToVideoIdMap = tagsToVideos;
-    console.log("tag to vid map: ", tagToVideoIdMap);
     const videoResultIdSet = new Set();
     const cleanedSelectedFilters = [];
 
@@ -58,7 +51,6 @@ function SavedPage(props) {
       // If the current tag is one that we should show, add it to the result ID set
       if (cleanedSelectedFilters.includes(key)) {
         const videoIdValues = tagToVideoIdMap[key];
-        console.log("vid id values: ", videoIdValues);
 
         // videoValues is an array. Add all of them to the video set
         videoIdValues.forEach((videoId) => {
@@ -70,31 +62,23 @@ function SavedPage(props) {
       }
     });
 
-    const idToVideoMetaMap = videosToMetadata;
-
     // Build the video metadata map that we pass into the SavedCard to render video info
-    const resultsToShow = [];
+    const resultsToShow = {};
     const videoResultIdArray = Array.from(videoResultIdSet);
     videoResultIdArray.forEach((videoId) => {
-      const videoMetaData = idToVideoMetaMap[videoId];
-      resultsToShow.push(videoMetaData);
+      const videoMetaData = videosToMetadata[videoId];
+      resultsToShow[videoId] = videoMetaData;
     });
-
-    console.log("results to show: ", resultsToShow);
 
     // Set the new state to the filtered video results
     setFilteredVideoResults(resultsToShow);
   }
 
-  // Video obj:
-  // - video.thumbNail = URL of image
-  // - video.name
-  // - video.channelName
   return (
     <div className="page">
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
-      {filteredVideoResults.map((result) => (
-        <SavedCard video={result} liked />
+      {Object.keys(filteredVideoResults).map((key) => (
+        <SavedCard videoId={key} videoData={filteredVideoResults[key]} liked />
       ))}
     </div>
   );

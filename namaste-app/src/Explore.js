@@ -17,7 +17,6 @@ function Explore(props) {
     setVideosToMetadata,
     setTagsToVideos,
   } = props.store;
-  console.log(props.store);
 
   const [loadingVideo, setLoadingVideo] = React.useState(false);
   const defaultTitle = "SELECT";
@@ -65,7 +64,7 @@ function Explore(props) {
         type: "video",
         videoDuration: videoDurationTitle,
         videoEmbeddable: "true",
-        key: "AIzaSyBFeYKd159v8xfoPSJfuctOYwKlJ8Z8Gnk",
+        key: "AIzaSyAO1kbN2GO_cSg0QbeD3cPlcLxM_d13LWw",
       },
     });
 
