@@ -77,3 +77,20 @@ body {
   color: #484848;
   opacity: 50%;
 }
+
+.tab-content {
+  width: 100%;
+}
+
+.navItem {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.bottomBar {
+  width: 67.99px;
+  height: 5.77px;
+
+  margin-left: 16px;
+  background: #ffbe5b;
+}

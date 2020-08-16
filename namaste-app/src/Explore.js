@@ -43,7 +43,7 @@ function Explore() {
     const response = await youtube.get("/search", {
       params: {
         part: "snippet",
-        maxResults: 50,
+        maxResults: 10,
         q: bodyRegionTitle + "yoga",
         type: "video",
         videoDuration: videoDurationTitle,
