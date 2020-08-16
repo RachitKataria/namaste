@@ -107,14 +107,15 @@ function Explore(props) {
     setFavorited(updatedFavorited);
 
     // Update saved states
+    let savedVideosUpdated = savedVideos;
+    let videosToMetadataUpdated = videosToMetadata;
+    let tagsToVideosUpdated = tagsToVideos;
+    const tag = parsedTag(bodyRegionTitle);
+
     if (updatedFavorited) {
-      let savedVideosUpdated = savedVideos;
       savedVideosUpdated.add(videoId);
       setSavedVideos(savedVideosUpdated);
 
-      const tag = parsedTag(bodyRegionTitle);
-
-      let videosToMetadataUpdated = videosToMetadata;
       videosToMetadataUpdated[videoId] = {
         channelName: videoChannel,
         tags: [parsedTag(bodyRegionTitle)],
@@ -123,11 +124,20 @@ function Explore(props) {
       };
       setVideosToMetadata(videosToMetadataUpdated);
 
-      let tagsToVideosUpdated = tagsToVideos;
       tagsToVideosUpdated[tag].push(videoId);
       setTagsToVideos(tagsToVideosUpdated);
     } else {
-      // No-op for now
+      savedVideosUpdated.delete(videoId);
+      setSavedVideos(savedVideosUpdated);
+
+      videosToMetadataUpdated.delete(videoId);
+      setVideosToMetadata(videosToMetadataUpdated);
+
+      const videoIndex = tagsToVideosUpdated[tag].indexOf(videoId);
+      if (videoIndex > -1) {
+        tagsToVideosUpdated[tag].splice(videoIndex, 1);
+      }
+      setTagsToVideos(tagsToVideosUpdated);
     }
   }
 
