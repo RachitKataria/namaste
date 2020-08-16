@@ -3,6 +3,7 @@ import Tag from "./Tag";
 import heartFilled from "./img/heart-filled.png";
 import heartEmpty from "./img/heart-empty.png";
 import { observer, inject } from "mobx-react";
+import { toggleSave } from "./Utils";
 
 import "./SavedCard.css";
 
@@ -40,43 +41,36 @@ function SavedCard(props) {
     const updatedFavorited = !favorited;
     setFavorited(updatedFavorited);
 
-    // Update saved states
-    let savedVideosUpdated = savedVideos;
-    let videosToMetadataUpdated = videosToMetadata;
-    let tagsToVideosUpdated = tagsToVideos;
+    const {
+      savedVideosUpdated,
+      videosToMetadataUpdated,
+      tagsToVideosUpdated,
+    } = toggleSave(
+      updatedFavorited,
+      savedVideos,
+      videosToMetadata,
+      tagsToVideos,
+      videoId,
+      videoChannel,
+      videoThumbnail,
+      videoTitle,
+      videoData.tags[0]
+    );
 
-    if (updatedFavorited) {
-      savedVideosUpdated.add(videoId);
-      setSavedVideos(savedVideosUpdated);
+    setSavedVideos(savedVideosUpdated);
+    localStorage.setItem(
+      "savedVideos",
+      JSON.stringify(Array.from(savedVideosUpdated))
+    );
 
-      videosToMetadataUpdated[videoId] = {
-        channelName: videoChannel,
-        tags: tags,
-        thumbNail: videoThumbnail,
-        name: videoTitle,
-      };
-      setVideosToMetadata(videosToMetadataUpdated);
+    setVideosToMetadata(videosToMetadataUpdated);
+    localStorage.setItem(
+      "videosToMetadata",
+      JSON.stringify(videosToMetadataUpdated)
+    );
 
-      tags.forEach((tag) => {
-        tagsToVideosUpdated[tag].push(videoId);
-      });
-      setTagsToVideos(tagsToVideosUpdated);
-    } else {
-      savedVideosUpdated.delete(videoId);
-      setSavedVideos(savedVideosUpdated);
-
-      delete videosToMetadataUpdated[videoId];
-      setVideosToMetadata(videosToMetadataUpdated);
-
-      tags.forEach((tag) => {
-        console.log(tag, tagsToVideosUpdated);
-        const videoIndex = tagsToVideosUpdated[tag].indexOf(videoId);
-        if (videoIndex > -1) {
-          tagsToVideosUpdated[tag].splice(videoIndex, 1);
-        }
-      });
-      setTagsToVideos(tagsToVideosUpdated);
-    }
+    setTagsToVideos(tagsToVideosUpdated);
+    localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
   }
 
   function convertSavedTagsToDisplayTags(tags) {

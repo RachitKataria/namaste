@@ -7,6 +7,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import youtube from "./youtube";
 import heartFilled from "./img/heart-filled.png";
 import heartEmpty from "./img/heart-empty.png";
+import { toggleSave } from "./Utils";
 
 function Explore(props) {
   const {
@@ -95,85 +96,40 @@ function Explore(props) {
   const [favorited, setFavorited] = React.useState(false);
   const heartImage = favorited ? heartFilled : heartEmpty;
 
-  const parsedTag = (tag) => {
-    const removeSpaces = tag.split(" ").join("");
-    const lowerCase = removeSpaces.toLowerCase();
-    return lowerCase;
-  };
-
   function toggleImage() {
     const updatedFavorited = !favorited;
     setFavorited(updatedFavorited);
 
-    // Update saved states
-    let savedVideosUpdated = savedVideos;
-    let videosToMetadataUpdated = videosToMetadata;
-    let tagsToVideosUpdated = tagsToVideos;
-    const tag = parsedTag(bodyRegionTitle);
+    const {
+      savedVideosUpdated,
+      videosToMetadataUpdated,
+      tagsToVideosUpdated,
+    } = toggleSave(
+      updatedFavorited,
+      savedVideos,
+      videosToMetadata,
+      tagsToVideos,
+      videoId,
+      videoChannel,
+      videoThumbnail,
+      videoTitle,
+      bodyRegionTitle
+    );
 
-    // Set video info in mobx and localstorage
-    if (updatedFavorited) {
-      savedVideosUpdated.add(videoId);
-      setSavedVideos(savedVideosUpdated);
-      localStorage.setItem(
-        "savedVideos",
-        JSON.stringify(Array.from(savedVideosUpdated))
-      );
+    setSavedVideos(savedVideosUpdated);
+    localStorage.setItem(
+      "savedVideos",
+      JSON.stringify(Array.from(savedVideosUpdated))
+    );
 
-      console.log(
-        "setting savedVideos in localstorage: ",
-        JSON.stringify(Array.from(savedVideosUpdated))
-      );
+    setVideosToMetadata(videosToMetadataUpdated);
+    localStorage.setItem(
+      "videosToMetadata",
+      JSON.stringify(videosToMetadataUpdated)
+    );
 
-      videosToMetadataUpdated[videoId] = {
-        channelName: videoChannel,
-        tags: [parsedTag(bodyRegionTitle)],
-        thumbNail: videoThumbnail,
-        name: videoTitle,
-      };
-      setVideosToMetadata(videosToMetadataUpdated);
-      localStorage.setItem(
-        "videosToMetadata",
-        JSON.stringify(videosToMetadataUpdated)
-      );
-
-      console.log("setting vidtometa in mobx: ", videosToMetadataUpdated);
-
-      console.log("type of vidtometa: ", typeof videosToMetadataUpdated);
-      console.log(
-        "setting vidtometa in localstorage: ",
-        JSON.stringify(videosToMetadataUpdated)
-      );
-
-      tagsToVideosUpdated[tag].push(videoId);
-      setTagsToVideos(tagsToVideosUpdated);
-      console.log(
-        "setting tagstovideos in localstorage: ",
-        JSON.stringify(tagsToVideosUpdated)
-      );
-      localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
-    } else {
-      savedVideosUpdated.delete(videoId);
-      setSavedVideos(savedVideosUpdated);
-      localStorage.setItem(
-        "savedVideos",
-        JSON.stringify(Array.from(savedVideosUpdated))
-      );
-
-      delete videosToMetadataUpdated[videoId];
-      setVideosToMetadata(videosToMetadataUpdated);
-      localStorage.setItem(
-        "videosToMetadata",
-        JSON.stringify(videosToMetadataUpdated)
-      );
-
-      const videoIndex = tagsToVideosUpdated[tag].indexOf(videoId);
-      if (videoIndex > -1) {
-        tagsToVideosUpdated[tag].splice(videoIndex, 1);
-      }
-      setTagsToVideos(tagsToVideosUpdated);
-      localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
-    }
+    setTagsToVideos(tagsToVideosUpdated);
+    localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
   }
 
   return (
