@@ -1,61 +1,61 @@
 .search-card {
-    border-radius: 25px;
-    background: white;
-    padding: 20px; 
-    width: auto;
-    height: auto;  
-    border: 1px solid black;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px auto;
+  border-radius: 25px;
+  background: white;
+  padding: 20px;
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px auto;
 }
 
 .videoName {
-    font-family: 'Montserrat';
-    color: #484848;
+  font-family: "Montserrat";
+  color: #484848;
 }
 
 .channelName {
-    font-family: 'Montserrat';
-    color: #484848;
-    opacity: 0.5;
+  font-family: "Montserrat";
+  color: #484848;
+  opacity: 0.5;
 }
 
 .videoDuration {
-    font-family: 'Montserrat';
-    margin-left: 10px;
-    color: #484848;
-    opacity: 0.5;
+  font-family: "Montserrat";
+  margin-left: 10px;
+  color: #484848;
+  opacity: 0.5;
 }
 
 .search-card-details {
-    display: inline-block;
-    margin-left: 10px;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .search-thumbnail {
-    display: inline-block;
+  display: inline-block;
 }
 
 .heart {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    height: 30px
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 30px;
 }
 
 .search-heart {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: #eee;
-    position: relative;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #eee;
+  position: relative;
+  text-align: center;
 }
 
 .search-heart:hover {
-    cursor: pointer
+  cursor: pointer;
 }

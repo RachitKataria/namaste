@@ -12,6 +12,9 @@ function Explore() {
   const [videoDurationTitle, setVideoDurationTitle] = React.useState(
     defaultTitle
   );
+  const [videoTitle, setVideoTitle] = React.useState("");
+  const [videoChannel, setVideoChannel] = React.useState("");
+
   const [videoURL, setVideoURL] = React.useState("");
   // Disable randomize button
   const shouldDisableRandomize = () => {
@@ -20,6 +23,13 @@ function Explore() {
       videoDurationTitle == defaultTitle ||
       loadingVideo
     );
+  };
+
+  const unEntity = (str) => {
+    return str
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">");
   };
 
   async function randomizeYoutube() {
@@ -43,6 +53,7 @@ function Explore() {
     });
 
     setLoadingVideo(false);
+    console.log(response);
     if (response != null) {
       console.log(response);
       const randVideoIndex = Math.floor(
@@ -50,6 +61,8 @@ function Explore() {
       );
       const videoData = response.data.items[randVideoIndex];
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
+      setVideoTitle(unEntity(videoData.snippet.title));
+      setVideoChannel(videoData.snippet.channelTitle);
     } else {
       console.log("Response unsuccessful");
     }
@@ -57,16 +70,22 @@ function Explore() {
 
   return (
     <div>
-      <div id="youtubeVideo">
+      <div>
         {videoURL != "" ? (
-          <iframe
-            width="560"
-            height="315"
-            src={videoURL}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <div id="youtubeVideo">
+            <iframe
+              width="560"
+              height="315"
+              src={videoURL}
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            <div id="videoMetaData">
+              <p id="videoTitle">{videoTitle}</p>
+              <p id="channelTitle">{videoChannel}</p>
+            </div>
+          </div>
         ) : loadingVideo ? (
           <div id="videoSpinner">
             <div className="d-flex justify-content-center">

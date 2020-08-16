@@ -7,7 +7,6 @@ import SavedPage from "./SavedPage";
 
 function HomePage({ keywordStore }) {
   const [initialized, setInitialized] = React.useState(false);
-
   React.useEffect(() => {
     if (!initialized) {
       keywordStore.setKeyword(localStorage.getItem("keyword") || "");
