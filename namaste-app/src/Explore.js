@@ -160,7 +160,7 @@ function Explore(props) {
         JSON.stringify(Array.from(savedVideosUpdated))
       );
 
-      videosToMetadataUpdated.delete(videoId);
+      delete videosToMetadataUpdated[videoId];
       setVideosToMetadata(videosToMetadataUpdated);
       localStorage.setItem(
         "videosToMetadata",

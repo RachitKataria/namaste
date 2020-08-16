@@ -23,8 +23,6 @@ function SavedCard(props) {
   const videoData = props.videoData;
   const liked = props.liked;
 
-  console.log(props);
-
   const savedTagsToDisplayTags = new Map();
   savedTagsToDisplayTags["neck"] = "Neck";
   savedTagsToDisplayTags["upperback"] = "Upper Back";
@@ -36,7 +34,7 @@ function SavedCard(props) {
   const videoTitle = videoData.name;
   const videoChannel = videoData.channelName;
   const videoThumbnail = videoData.thumbNail;
-  const tags = convertSavedTagsToDisplayTags(videoData.tags);
+  const tags = videoData.tags;
 
   function toggleImage() {
     const updatedFavorited = !favorited;
@@ -67,10 +65,11 @@ function SavedCard(props) {
       savedVideosUpdated.delete(videoId);
       setSavedVideos(savedVideosUpdated);
 
-      videosToMetadataUpdated.delete(videoId);
+      delete videosToMetadataUpdated[videoId];
       setVideosToMetadata(videosToMetadataUpdated);
 
       tags.forEach((tag) => {
+        console.log(tag, tagsToVideosUpdated);
         const videoIndex = tagsToVideosUpdated[tag].indexOf(videoId);
         if (videoIndex > -1) {
           tagsToVideosUpdated[tag].splice(videoIndex, 1);
@@ -102,7 +101,7 @@ function SavedCard(props) {
         <br />
         <span class="channelName">{videoChannel}</span>
         <br />
-        {tags.map((tag) => (
+        {convertSavedTagsToDisplayTags(tags).map((tag) => (
           <Tag active isClickable={false} text={tag} />
         ))}
       </div>
