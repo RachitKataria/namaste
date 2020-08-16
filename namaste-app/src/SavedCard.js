@@ -93,7 +93,7 @@ function SavedCard(props) {
   return (
     <div class="search-card">
       <div class="search-thumbnail">
-        <img src="https://i.ytimg.com/vi/t1aYwLUeSIU/default.jpg" alt="new" />
+        <img src={videoThumbnail} alt="new" />
       </div>
       <div class="search-card-details">
         <span class="videoName">

@@ -80,7 +80,7 @@ function Explore(props) {
       setVideoId(videoData.id.videoId);
 
       // Set thumbnail
-      setVideoThumbnail(videoData.snippet.thumbnails.default);
+      setVideoThumbnail(videoData.snippet.thumbnails.default.url);
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
@@ -111,9 +111,19 @@ function Explore(props) {
     let tagsToVideosUpdated = tagsToVideos;
     const tag = parsedTag(bodyRegionTitle);
 
+    // Set video info in mobx and localstorage
     if (updatedFavorited) {
       savedVideosUpdated.add(videoId);
       setSavedVideos(savedVideosUpdated);
+      localStorage.setItem(
+        "savedVideos",
+        JSON.stringify(Array.from(savedVideosUpdated))
+      );
+
+      console.log(
+        "setting savedVideos in localstorage: ",
+        JSON.stringify(Array.from(savedVideosUpdated))
+      );
 
       videosToMetadataUpdated[videoId] = {
         channelName: videoChannel,
@@ -122,21 +132,47 @@ function Explore(props) {
         name: videoTitle,
       };
       setVideosToMetadata(videosToMetadataUpdated);
+      localStorage.setItem(
+        "videosToMetadata",
+        JSON.stringify(videosToMetadataUpdated)
+      );
+
+      console.log("setting vidtometa in mobx: ", videosToMetadataUpdated);
+
+      console.log("type of vidtometa: ", typeof videosToMetadataUpdated);
+      console.log(
+        "setting vidtometa in localstorage: ",
+        JSON.stringify(videosToMetadataUpdated)
+      );
 
       tagsToVideosUpdated[tag].push(videoId);
       setTagsToVideos(tagsToVideosUpdated);
+      console.log(
+        "setting tagstovideos in localstorage: ",
+        JSON.stringify(tagsToVideosUpdated)
+      );
+      localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
     } else {
       savedVideosUpdated.delete(videoId);
       setSavedVideos(savedVideosUpdated);
+      localStorage.setItem(
+        "savedVideos",
+        JSON.stringify(Array.from(savedVideosUpdated))
+      );
 
       videosToMetadataUpdated.delete(videoId);
       setVideosToMetadata(videosToMetadataUpdated);
+      localStorage.setItem(
+        "videosToMetadata",
+        JSON.stringify(videosToMetadataUpdated)
+      );
 
       const videoIndex = tagsToVideosUpdated[tag].indexOf(videoId);
       if (videoIndex > -1) {
         tagsToVideosUpdated[tag].splice(videoIndex, 1);
       }
       setTagsToVideos(tagsToVideosUpdated);
+      localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
     }
   }
 
