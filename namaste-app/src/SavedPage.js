@@ -42,7 +42,7 @@ function SavedPage(props) {
 
     // Map of all tags to videos from localstorage
     const tagToVideoIdMap = tagsToVideos;
-    console.log("tag to vid map: ", tagToVideoIdMap);
+    console.log("mobx tag to vid map: ", tagToVideoIdMap);
     const videoResultIdSet = new Set();
     const cleanedSelectedFilters = [];
 
@@ -71,6 +71,7 @@ function SavedPage(props) {
     });
 
     const idToVideoMetaMap = videosToMetadata;
+    console.log("mobx id to meta map: ", idToVideoMetaMap);
 
     // Build the video metadata map that we pass into the SavedCard to render video info
     const resultsToShow = [];

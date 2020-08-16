@@ -20,6 +20,7 @@ function SavedCard({ video, liked }) {
 
   const videoName = video.name;
   const channelName = video.channelName;
+  const videoThumbnail = video.thumbNail;
   const tags = convertSavedTagsToDisplayTags(video.tags);
 
   function toggleImage() {
@@ -40,7 +41,7 @@ function SavedCard({ video, liked }) {
   return (
     <div class="search-card">
       <div class="search-thumbnail">
-        <img src="https://i.ytimg.com/vi/t1aYwLUeSIU/default.jpg" alt="new" />
+        <img src={videoThumbnail} alt="new" />
       </div>
       <div class="search-card-details">
         <span class="videoName">

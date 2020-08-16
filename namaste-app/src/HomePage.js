@@ -1,5 +1,5 @@
 import React from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import Tabs from "react-bootstrap/Tabs";
 import Row from "react-bootstrap/Row";
 import Nav from "react-bootstrap/Nav";
@@ -7,11 +7,49 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Explore from "./Explore";
 import SavedPage from "./SavedPage";
-import KeywordStore from "./store";
-import { Provider } from "mobx-react";
 
-function HomePage() {
+function HomePage(props) {
   const [activeTab, setActiveTab] = React.useState("explore");
+
+  const { setSavedVideos, setVideosToMetadata, setTagsToVideos } = props.store;
+  console.log(props.store);
+
+  React.useEffect(() => {
+    // Get all info from localstorage and set the correct keys into mobx
+    console.log(
+      "local saved videos: ",
+      JSON.parse(localStorage.getItem("savedVideos"))
+    );
+    const localStorageSavedVideos = JSON.parse(
+      localStorage.getItem("savedVideos")
+    );
+
+    if (localStorageSavedVideos) {
+      setSavedVideos(new Set(localStorageSavedVideos));
+    }
+
+    console.log(
+      "local tags to videos: ",
+      JSON.parse(localStorage.getItem("tagsToVideos"))
+    );
+    const localStorageTagsToVideos = JSON.parse(
+      localStorage.getItem("tagsToVideos")
+    );
+    if (localStorageTagsToVideos) {
+      setTagsToVideos(localStorageTagsToVideos);
+    }
+
+    console.log(
+      "local videos to metadata :",
+      JSON.parse(localStorage.getItem("videosToMetadata"))
+    );
+    const localStorageVideosToMetadata = JSON.parse(
+      localStorage.getItem("videosToMetadata")
+    );
+    if (localStorageVideosToMetadata) {
+      setVideosToMetadata(localStorageVideosToMetadata);
+    }
+  }, []);
 
   return (
     <div className="page">
@@ -53,21 +91,12 @@ function HomePage() {
           <Row>
             <Tab.Content>
               <Tab.Pane eventKey="explore">
-                <Provider store={KeywordStore}>
-                  <Explore />
-                </Provider>
+                <Explore />
               </Tab.Pane>
               <Tab.Pane eventKey="saved">
-                <Provider store={KeywordStore}>
-                  <SavedPage
-                    supportedFilters={[
-                      "Neck",
-                      "Upper Back",
-                      "Lower Back",
-                      "Abs",
-                    ]}
-                  />
-                </Provider>
+                <SavedPage
+                  supportedFilters={["Neck", "Upper Back", "Lower Back", "Abs"]}
+                />
               </Tab.Pane>
             </Tab.Content>
           </Row>
@@ -77,4 +106,4 @@ function HomePage() {
     </div>
   );
 }
-export default observer(HomePage);
+export default inject("store")(observer(HomePage));

@@ -1,7 +1,7 @@
 import { observable, action, decorate } from "mobx";
 class KeywordStore {
   savedVideos = new Set();
-  videosToMetadata = new Map();
+  videosToMetadata = {};
   tagsToVideos = {
     neck: [],
     upperback: [],
