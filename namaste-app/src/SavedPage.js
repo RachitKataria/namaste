@@ -13,11 +13,6 @@ function SavedPage(props) {
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
 
-  // React.useEffect(() => {
-  //   const results = getVideosForSelectedFilters(selectedFilters);
-  //   setSelectedFilters(results);
-  // }, [selectedFilters, props]);
-
   function onFilterClick(filter) {
     const newFilters = selectedFilters;
 
