@@ -191,8 +191,9 @@ function Explore(props) {
           ></iframe>
           <div>
             <div id="videoTextMetadata">
-              <p id="videoTitle">{videoTitle}</p>
-              <p id="channelTitle">{videoChannel}</p>
+              <span id="videoTitle">{videoTitle}</span>
+              <br />
+              <span id="channelTitle">{videoChannel}</span>
             </div>
             <div id="videoImgMetadata">
               <img
