@@ -37,6 +37,7 @@ body {
 
 #heartImage {
   margin-top: 10px;
+  margin-left: 15px;
   text-align: center;
   width: 30px;
   height: 30px;
@@ -91,12 +92,11 @@ body {
 #channelTitle {
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 24px;
   letter-spacing: 0.03em;
   text-transform: capitalize;
-  color: #484848;
-  opacity: 50%;
+  color: #838383;
 }
 
 .tab-content {
