@@ -30,8 +30,12 @@ function Explore(props) {
   const [videoId, setVideoId] = React.useState("");
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
+  const [saved, setSaved] = React.useState(savedVideos.has(videoId));
 
   const [videoURL, setVideoURL] = React.useState("");
+
+  const isSaved = savedVideos.has(videoId);
+
   // Disable randomize button
   const shouldDisableRandomize = () => {
     return (
@@ -88,25 +92,26 @@ function Explore(props) {
       setVideoChannel(videoData.snippet.channelTitle);
 
       const videoIsSaved = savedVideos.has(videoData.id.videoId);
-      setFavorited(videoIsSaved);
+      setSaved(videoIsSaved);
     } else {
       console.log("Response unsuccessful");
     }
   }
 
-  const [favorited, setFavorited] = React.useState(false);
-  const heartImage = favorited ? heartFilled : heartEmpty;
+  function calculatedHeartImage() {
+    return isSaved ? heartFilled : heartEmpty;
+  }
 
   function toggleImage() {
-    const updatedFavorited = !favorited;
-    setFavorited(updatedFavorited);
+    const updatedSaved = !isSaved;
+    setSaved(updatedSaved);
 
     const {
       savedVideosUpdated,
       videosToMetadataUpdated,
       tagsToVideosUpdated,
     } = toggleSave(
-      updatedFavorited,
+      updatedSaved,
       savedVideos,
       videosToMetadata,
       tagsToVideos,
@@ -155,7 +160,7 @@ function Explore(props) {
               <img
                 id="heartImage"
                 onClick={toggleImage}
-                src={heartImage}
+                src={calculatedHeartImage()}
                 alt="new"
               />
             </div>
