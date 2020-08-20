@@ -5,8 +5,7 @@ import "./FilterBar.css";
 
 function FilterBar({ filters, onFilterClick }) {
   return (
-    <div>
-      <span class="body-region-text">Body Region: </span>
+    <div id="filter-bar">
       {filters.map((filter) => (
         <Tag isClickable clickHandler={onFilterClick} text={filter} />
       ))}
