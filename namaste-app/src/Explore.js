@@ -181,20 +181,20 @@ function Explore(props) {
               <p>BODY REGION</p>
               <DropdownButton id="defaultButton" title={bodyRegionTitle}>
                 <Dropdown.Item>
-                  <div onClick={(e) => setBodyRegionTitle("NECK")}>NECK</div>
+                  <div onClick={(e) => setBodyRegionTitle("Neck")}>Neck</div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div onClick={(e) => setBodyRegionTitle("UPPER BACK")}>
-                    UPPER BACK
+                  <div onClick={(e) => setBodyRegionTitle("Upper Back")}>
+                    Upper Back
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div onClick={(e) => setBodyRegionTitle("LOWER BACK")}>
-                    LOWER BACK
+                  <div onClick={(e) => setBodyRegionTitle("Lower Back")}>
+                    Lower Back
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div onClick={(e) => setBodyRegionTitle("ABS")}>ABS</div>
+                  <div onClick={(e) => setBodyRegionTitle("Abs")}>Abs</div>
                 </Dropdown.Item>
               </DropdownButton>
             </div>
@@ -204,17 +204,17 @@ function Explore(props) {
               <p>VIDEO DURATION</p>
               <DropdownButton id="defaultButton" title={videoDurationTitle}>
                 <Dropdown.Item>
-                  <div onClick={(e) => setVideoDurationTitle("SHORT")}>
-                    SHORT
+                  <div onClick={(e) => setVideoDurationTitle("Short")}>
+                    Short
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div onClick={(e) => setVideoDurationTitle("MEDIUM")}>
-                    MEDIUM
+                  <div onClick={(e) => setVideoDurationTitle("Medium")}>
+                    Medium
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div onClick={(e) => setVideoDurationTitle("LONG")}>LONG</div>
+                  <div onClick={(e) => setVideoDurationTitle("Long")}>Long</div>
                 </Dropdown.Item>
               </DropdownButton>
             </div>
