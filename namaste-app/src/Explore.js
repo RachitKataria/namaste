@@ -155,7 +155,7 @@ function Explore(props) {
               <br />
               <span id="channelTitle">{videoChannel}</span>
             </div>
-            <div id="videoImgMetadata">
+            <div className="videoImgMetadata">
               <img
                 id="heartImage"
                 onClick={toggleImage}

@@ -29,7 +29,7 @@ body {
   position: relative;
 }
 
-#videoImgMetadata {
+.videoImgMetadata {
   float: right;
   width: 10%;
 }
@@ -38,8 +38,14 @@ body {
   margin-top: 10px;
   margin-left: 15px;
   text-align: center;
-  width: 30px;
   height: 30px;
+}
+
+#heartImage:hover {
+  cursor: pointer;
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
 }
 
 #randomizeButton {
@@ -109,10 +115,6 @@ body {
   margin-right: 50px;
 }
 
-.navItem:hover {
-  color: red;
-}
-
 .bottomBar {
   width: 67.99px;
   height: 5.77px;
@@ -123,10 +125,6 @@ body {
 
 #tabRow {
   margin-bottom: 50px;
-}
-
-img:hover {
-  cursor: pointer;
 }
 
 p {
