@@ -116,10 +116,9 @@ function SavedPage(props) {
       )}
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
       {!Object.keys(filtersToShow).length && (
-        <div>
-          <p id="noSavedVideosText">
-            No saved videos yet! Click on the heart below a video to add one.
-            &#9997;
+        <div id="noSavedVideosText">
+          <p style={{ textAlign: "center" }}>
+            No saved videos yet! Head to the Explore tab to add one. &#9997;
           </p>
         </div>
       )}
