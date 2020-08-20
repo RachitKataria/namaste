@@ -92,7 +92,7 @@ function HomePage(props) {
               </Tab.Pane>
               <Tab.Pane eventKey="saved">
                 <SavedPage
-                  supportedFilters={["Neck", "Upper Back", "Lower Back", "Abs"]}
+                  supportedFilters={["NECK", "UPPER BACK", "LOWER BACK", "ABS"]}
                 />
               </Tab.Pane>
             </Tab.Content>

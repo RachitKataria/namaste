@@ -78,12 +78,17 @@ function SavedPage(props) {
     console.log("clicked saved video");
 
     // Set the currently displayed video info in the store
-    setCurrentlyDisplayedVideoInfo({
-      id: videoId,
-      title: videoData.name,
-      channelName: videoData.channelName,
-      url: "https://www.youtube.com/embed/" + videoId,
-    });
+    // If clicking on an already selected tile, remove the video
+    if (videoId === currentlyDisplayedVideoInfo.id) {
+      setCurrentlyDisplayedVideoInfo({});
+    } else {
+      setCurrentlyDisplayedVideoInfo({
+        id: videoId,
+        title: videoData.name,
+        channelName: videoData.channelName,
+        url: "https://www.youtube.com/embed/" + videoId,
+      });
+    }
 
     // Scroll to top of screen
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
