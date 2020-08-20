@@ -7,7 +7,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 10px auto;
-  opacity: 50%;
+  opacity: 0.5;
   border: 2px solid #838383;
 }
 
@@ -20,19 +20,19 @@
   display: flex;
   flex-wrap: wrap;
   margin: 10px auto;
-  opacity: 100%;
+  opacity: 1;
   border: 2px solid #ffbe5b;
 }
 
 .search-card-selected:hover {
   cursor: pointer;
-  opacity: 100%;
+  opacity: 1;
   border: 2px solid #ffbe5b;
 }
 
 .search-card-unselected:hover {
   cursor: pointer;
-  opacity: 100%;
+  opacity: 1;
   border: 2px solid #ffbe5b;
 }
 
