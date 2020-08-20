@@ -103,7 +103,6 @@ function SavedPage(props) {
     const totalSavedVideos = Object.keys(getVideosForSelectedFilters([]))
       .length;
 
-    console.log("total saved videos: ", totalSavedVideos);
     // If we don't have any videos saved at all or we're selecting all or no filters
     if (totalSavedVideos === 0 || selectedNoneOrAllFilters) {
       return (
