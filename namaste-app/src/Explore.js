@@ -61,20 +61,20 @@ function Explore(props) {
     // Reset video URL
     setVideoURL("");
 
-    const response = await youtube.get("/search", {
-      params: {
-        part: "snippet",
-        maxResults: 50,
-        q: bodyRegionTitle + "yoga",
-        type: "video",
-        videoDuration: videoDurationTitle,
-        videoEmbeddable: "true",
-        key: process.env.REACT_APP_YOUTUBE_API_KEY,
-      },
-    });
+    try {
+      const response = await youtube.get("/search", {
+        params: {
+          part: "snippet",
+          maxResults: 50,
+          q: bodyRegionTitle + "yoga",
+          type: "video",
+          videoDuration: videoDurationTitle,
+          videoEmbeddable: "true",
+          key: process.env.REACT_APP_YOUTUBE_API_KEY,
+        },
+      });
 
-    setLoadingVideo(false);
-    if (response != null) {
+      setLoadingVideo(false);
       const randVideoIndex = Math.floor(
         Math.random() * response.data.items.length
       );
@@ -90,7 +90,10 @@ function Explore(props) {
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
       setIsError(false);
-    } else {
+    } catch (err) {
+      console.log("Error: ", err);
+
+      setLoadingVideo(false);
       setVideoURL("");
       setIsError(true);
       console.log("Response unsuccessful");
