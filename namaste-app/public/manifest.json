@@ -1,6 +1,6 @@
 {
-  "short_name": "Weather Extension",
-  "name": "Weather Extension",
+  "short_name": "Namaste",
+  "name": "Namaste",
   "icons": {
     "16": "favicon.ico",
     "48": "logo192.png",
@@ -12,6 +12,6 @@
   "version": "0.0.1",
   "browser_action": {
     "default_popup": "index.html",
-    "default_title": "Weather Widget"
+    "default_title": "Namaste"
   }
 }
