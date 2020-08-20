@@ -140,3 +140,7 @@ h1 {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.nav-tabs {
+  opacity: 0;
+}

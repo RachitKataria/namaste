@@ -53,9 +53,9 @@ function HomePage(props) {
 
   const getLinkStyle = (linkName) => {
     if (linkName == activeTab) {
-      return { color: "#484848" };
+      return { color: "#484848" }; // Active
     } else {
-      return { color: "#c3bfb9" };
+      return { color: "#c3bfb9" }; // Inactive
     }
   };
 
