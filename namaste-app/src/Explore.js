@@ -166,7 +166,11 @@ function Explore(props) {
       ) : loadingVideo ? (
         <div id="videoSpinner">
           <div className="d-flex justify-content-center">
-            <div className="spinner-border m-4" role="status">
+            <div
+              className="spinner-border m-4"
+              role="status"
+              style={{ color: "#d05e18" }}
+            >
               <span className="sr-only">Loading...</span>
             </div>
           </div>
