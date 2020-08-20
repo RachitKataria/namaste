@@ -89,8 +89,13 @@ function SavedCard(props) {
     return displayTags;
   }
 
+  const styleClassBasedOnSelect =
+    videoId === currentlyDisplayedVideoInfo.id
+      ? "search-card-selected"
+      : "search-card-unselected";
+
   return (
-    <div onClick={onClick} class="search-card">
+    <div onClick={onClick} class={styleClassBasedOnSelect}>
       <div class="search-thumbnail">
         <img src={videoThumbnail} alt="new" />
       </div>
