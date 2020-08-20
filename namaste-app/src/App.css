@@ -80,7 +80,20 @@ body {
 
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
+  line-height: 24px;
+
+  color: #545c52;
+}
+
+#randomizeButtonId {
+  background-color: #ffbe5b;
+  border-radius: 8px;
+  border: none;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
   line-height: 24px;
 
   color: #545c52;

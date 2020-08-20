@@ -20,7 +20,7 @@ function Explore(props) {
   } = props.store;
 
   const [loadingVideo, setLoadingVideo] = React.useState(false);
-  const defaultTitle = "SELECT";
+  const defaultTitle = "Select";
   const [videoThumbnail, setVideoThumbnail] = React.useState("");
 
   const [bodyRegionTitle, setBodyRegionTitle] = React.useState(defaultTitle);
@@ -222,7 +222,7 @@ function Explore(props) {
         </div>
         <div id="randomizeButton">
           <Button
-            id="defaultButton"
+            id="randomizeButtonId"
             variant="primary"
             onClick={randomizeYoutube}
             disabled={shouldDisableRandomize()}
