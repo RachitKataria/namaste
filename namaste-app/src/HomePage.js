@@ -36,7 +36,7 @@ function HomePage(props) {
     if (localStorageVideosToMetadata) {
       setVideosToMetadata(localStorageVideosToMetadata);
     }
-  }, []);
+  });
 
   const getLinkStyle = (linkName) => {
     if (linkName === activeTab) {

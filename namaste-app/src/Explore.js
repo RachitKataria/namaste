@@ -32,7 +32,6 @@ function Explore(props) {
   const [videoId, setVideoId] = React.useState("");
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
-  const [saved, setSaved] = React.useState(savedVideos.has(videoId));
 
   const [videoURL, setVideoURL] = React.useState("");
 
@@ -56,7 +55,6 @@ function Explore(props) {
   };
 
   async function randomizeYoutube() {
-    console.log("RANDOMIZE");
     // Query youtube API
     setLoadingVideo(true);
 
@@ -147,6 +145,7 @@ function Explore(props) {
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            title="explore-video-display"
           ></iframe>
           <div>
             <div id="videoTextMetadata">
