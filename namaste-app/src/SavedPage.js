@@ -75,8 +75,6 @@ function SavedPage(props) {
   }
 
   function displayVideo(videoId, videoData) {
-    console.log("clicked saved video");
-
     // Set the currently displayed video info in the store
     // If clicking on an already selected tile, remove the video
     if (videoId === currentlyDisplayedVideoInfo.id) {
@@ -99,7 +97,6 @@ function SavedPage(props) {
   const videoTitle = currentlyDisplayedVideoInfo.title;
   const videoChannel = currentlyDisplayedVideoInfo.channelName;
 
-  console.log("filters to shohw: ", filtersToShow);
   return (
     <div id="savedPage">
       {videoURL && (
@@ -111,6 +108,7 @@ function SavedPage(props) {
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            title="saved-video-display"
           ></iframe>
           <div id="videoTextMetadata">
             <span id="videoTitle">{videoTitle}</span>
@@ -123,7 +121,10 @@ function SavedPage(props) {
       {!Object.keys(filtersToShow).length && (
         <div id="noSavedVideosText">
           <p style={{ textAlign: "center" }}>
-            No saved videos yet! Head to the Explore tab to add one. &#9997;
+            No saved videos yet! Head to the Explore tab to add one.{" "}
+            <span role="img" aria-label="writing-emoji">
+              &#9997;
+            </span>
           </p>
         </div>
       )}

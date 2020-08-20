@@ -38,7 +38,7 @@ function SavedCard(props) {
 
   function setVideoUnsaved(e) {
     // When clicking the element, stop click propogation to parent elements
-    if (!e) var e = window.event;
+    if (!e) e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
 

@@ -30,7 +30,6 @@ function Explore(props) {
   const [videoId, setVideoId] = React.useState("");
   const [videoTitle, setVideoTitle] = React.useState("");
   const [videoChannel, setVideoChannel] = React.useState("");
-  const [saved, setSaved] = React.useState(savedVideos.has(videoId));
 
   const [videoURL, setVideoURL] = React.useState("");
 
@@ -54,7 +53,6 @@ function Explore(props) {
   };
 
   async function randomizeYoutube() {
-    console.log("RANDOMIZE");
     // Query youtube API
     setLoadingVideo(true);
 
@@ -89,11 +87,6 @@ function Explore(props) {
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
-
-      const videoIsSaved = savedVideos.has(videoData.id.videoId);
-      setSaved(videoIsSaved);
-    } else {
-      console.log("Response unsuccessful");
     }
   }
 
@@ -103,7 +96,6 @@ function Explore(props) {
 
   function toggleImage() {
     const updatedSaved = !isSaved;
-    setSaved(updatedSaved);
 
     const {
       savedVideosUpdated,
@@ -148,6 +140,7 @@ function Explore(props) {
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            title="explore-video-display"
           ></iframe>
           <div>
             <div id="videoTextMetadata">
