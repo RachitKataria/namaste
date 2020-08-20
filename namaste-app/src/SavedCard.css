@@ -2,7 +2,7 @@
   border-radius: 25px;
   background: white;
   padding: 20px;
-  width: 700px;
+  width: 660px;
   height: auto;
   border: 1px solid black;
   display: flex;
@@ -71,4 +71,10 @@
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1);
+}
+
+#noSavedVideosText {
+  padding: 20px;
+  width: 660px;
+  margin: 10px auto;
 }

@@ -94,6 +94,7 @@ function SavedPage(props) {
   const videoTitle = currentlyDisplayedVideoInfo.title;
   const videoChannel = currentlyDisplayedVideoInfo.channelName;
 
+  console.log("filters to shohw: ", filtersToShow);
   return (
     <div id="savedPage">
       {videoURL && (
@@ -114,6 +115,14 @@ function SavedPage(props) {
         </div>
       )}
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
+      {!Object.keys(filtersToShow).length && (
+        <div>
+          <p id="noSavedVideosText">
+            No saved videos yet! Click on the heart below a video to add one.
+            &#9997;
+          </p>
+        </div>
+      )}
       {Object.keys(filtersToShow).map((key) => (
         <SavedCard
           onClick={() => displayVideo(key, filtersToShow[key])}
