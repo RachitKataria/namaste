@@ -6,12 +6,15 @@ import { observer, inject } from "mobx-react";
 // supportedFilters is an array
 function SavedPage(props) {
   const supportedFilters = props.supportedFilters;
-  const { savedVideos, videosToMetadata, tagsToVideos } = props.store;
+  const {
+    savedVideos,
+    videosToMetadata,
+    tagsToVideos,
+    currentlyDisplayedVideoInfo,
+    setCurrentlyDisplayedVideoInfo,
+  } = props.store;
   // initialize filters to none
   const [selectedFilters, setSelectedFilters] = React.useState([]);
-  const [videoURL, setVideoURL] = React.useState("");
-  const [videoTitle, setVideoTitle] = React.useState("");
-  const [videoChannel, setVideoChannel] = React.useState("");
 
   function onFilterClick(filter) {
     const newFilters = selectedFilters;
@@ -74,18 +77,26 @@ function SavedPage(props) {
   function displayVideo(videoId, videoData) {
     console.log("clicked saved video");
 
-    setVideoURL("https://www.youtube.com/embed/" + videoId);
-    setVideoTitle(videoData.name);
-    setVideoChannel(videoData.channelName);
+    // Set the currently displayed video info in the store
+    setCurrentlyDisplayedVideoInfo({
+      id: videoId,
+      title: videoData.name,
+      channelName: videoData.channelName,
+      url: "https://www.youtube.com/embed/" + videoId,
+    });
 
     // Scroll to top of screen
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
 
   const filtersToShow = getVideosForSelectedFilters(selectedFilters);
+  const videoURL = currentlyDisplayedVideoInfo.url;
+  const videoTitle = currentlyDisplayedVideoInfo.title;
+  const videoChannel = currentlyDisplayedVideoInfo.channelName;
+
   return (
     <div id="savedPage">
-      {videoURL != "" && (
+      {videoURL && (
         <div id="youtubeVideo">
           <iframe
             width="560"

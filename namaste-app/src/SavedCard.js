@@ -16,9 +16,11 @@ function SavedCard(props) {
     savedVideos,
     videosToMetadata,
     tagsToVideos,
+    currentlyDisplayedVideoInfo,
     setSavedVideos,
     setVideosToMetadata,
     setTagsToVideos,
+    setCurrentlyDisplayedVideoInfo,
   } = props.store;
   const videoId = props.videoId;
   const videoData = props.videoData;
@@ -36,7 +38,12 @@ function SavedCard(props) {
   const videoThumbnail = videoData.thumbNail;
   const tags = videoData.tags;
 
-  function setVideoUnsaved() {
+  function setVideoUnsaved(e) {
+    // When clicking the element, stop click propogation to parent elements
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+
     const {
       savedVideosUpdated,
       videosToMetadataUpdated,
@@ -67,6 +74,12 @@ function SavedCard(props) {
 
     setTagsToVideos(tagsToVideosUpdated);
     localStorage.setItem("tagsToVideos", JSON.stringify(tagsToVideosUpdated));
+
+    // If the current video ID that we're unsaving is the same as what's in the store, unset it
+    // to trigger a rerender to remove the displayed video
+    if (videoId === currentlyDisplayedVideoInfo.id) {
+      setCurrentlyDisplayedVideoInfo({});
+    }
   }
 
   function convertSavedTagsToDisplayTags(tags) {

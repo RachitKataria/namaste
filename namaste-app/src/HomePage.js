@@ -12,14 +12,9 @@ function HomePage(props) {
   const [activeTab, setActiveTab] = React.useState("explore");
 
   const { setSavedVideos, setVideosToMetadata, setTagsToVideos } = props.store;
-  console.log(props.store);
 
   React.useEffect(() => {
     // Get all info from localstorage and set the correct keys into mobx
-    console.log(
-      "local saved videos: ",
-      JSON.parse(localStorage.getItem("savedVideos"))
-    );
     const localStorageSavedVideos = JSON.parse(
       localStorage.getItem("savedVideos")
     );
@@ -28,10 +23,6 @@ function HomePage(props) {
       setSavedVideos(new Set(localStorageSavedVideos));
     }
 
-    console.log(
-      "local tags to videos: ",
-      JSON.parse(localStorage.getItem("tagsToVideos"))
-    );
     const localStorageTagsToVideos = JSON.parse(
       localStorage.getItem("tagsToVideos")
     );
@@ -39,10 +30,6 @@ function HomePage(props) {
       setTagsToVideos(localStorageTagsToVideos);
     }
 
-    console.log(
-      "local videos to metadata :",
-      JSON.parse(localStorage.getItem("videosToMetadata"))
-    );
     const localStorageVideosToMetadata = JSON.parse(
       localStorage.getItem("videosToMetadata")
     );

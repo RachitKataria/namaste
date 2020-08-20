@@ -75,7 +75,6 @@ function Explore(props) {
 
     setLoadingVideo(false);
     if (response != null) {
-      console.log(response);
       const randVideoIndex = Math.floor(
         Math.random() * response.data.items.length
       );
