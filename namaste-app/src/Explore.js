@@ -75,6 +75,7 @@ function Explore(props) {
       const randVideoIndex = Math.floor(
         Math.random() * response.data.items.length
       );
+
       const videoData = response.data.items[randVideoIndex];
 
       // Set video id

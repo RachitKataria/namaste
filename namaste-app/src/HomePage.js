@@ -51,10 +51,18 @@ function HomePage(props) {
     }
   }, []);
 
+  const getLinkStyle = (linkName) => {
+    if (linkName == activeTab) {
+      return { color: "#484848" };
+    } else {
+      return { color: "#c3bfb9" };
+    }
+  };
+
   return (
     <div className="page">
       <div style={{ textAlign: "center" }}>
-        <h1>Namaste</h1>
+        <h1>NAMASTE</h1>
       </div>
       <div>
         <Tab.Container id="tabs" activeKey={activeTab}>
@@ -65,6 +73,7 @@ function HomePage(props) {
                   <Nav.Link
                     eventKey="explore"
                     onClick={() => setActiveTab("explore")}
+                    style={getLinkStyle("explore")}
                   >
                     EXPLORE
                   </Nav.Link>
@@ -78,6 +87,7 @@ function HomePage(props) {
                   <Nav.Link
                     eventKey="saved"
                     onClick={() => setActiveTab("saved")}
+                    style={getLinkStyle("saved")}
                   >
                     SAVED
                   </Nav.Link>

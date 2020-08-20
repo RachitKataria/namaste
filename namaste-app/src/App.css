@@ -108,6 +108,10 @@ body {
   margin-right: 50px;
 }
 
+.navItem:hover {
+  color: red;
+}
+
 .bottomBar {
   width: 67.99px;
   height: 5.77px;
@@ -118,4 +122,16 @@ body {
 
 #tabRow {
   margin-bottom: 50px;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+p {
+  color: #484848;
+}
+
+h1 {
+  color: #d05e18;
 }
