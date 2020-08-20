@@ -39,7 +39,7 @@ function HomePage(props) {
   }, []);
 
   const getLinkStyle = (linkName) => {
-    if (linkName == activeTab) {
+    if (linkName === activeTab) {
       return { color: "#484848" }; // Active
     } else {
       return { color: "#c3bfb9" }; // Inactive
@@ -65,7 +65,7 @@ function HomePage(props) {
                     EXPLORE
                   </Nav.Link>
                 </Nav.Item>
-                {activeTab == "explore" ? (
+                {activeTab === "explore" ? (
                   <div className="bottomBar"></div>
                 ) : null}
               </div>
@@ -79,7 +79,7 @@ function HomePage(props) {
                     SAVED
                   </Nav.Link>
                 </Nav.Item>
-                {activeTab == "saved" ? (
+                {activeTab === "saved" ? (
                   <div className="bottomBar"></div>
                 ) : null}{" "}
               </div>

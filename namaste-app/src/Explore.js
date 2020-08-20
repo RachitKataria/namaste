@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 
 import { observer, inject } from "mobx-react";
@@ -39,8 +39,8 @@ function Explore(props) {
   // Disable randomize button
   const shouldDisableRandomize = () => {
     return (
-      bodyRegionTitle == defaultTitle ||
-      videoDurationTitle == defaultTitle ||
+      bodyRegionTitle === defaultTitle ||
+      videoDurationTitle === defaultTitle ||
       loadingVideo
     );
   };
@@ -64,7 +64,7 @@ function Explore(props) {
     const response = await youtube.get("/search", {
       params: {
         part: "snippet",
-        maxResults: 10,
+        maxResults: 50,
         q: bodyRegionTitle + "yoga",
         type: "video",
         videoDuration: videoDurationTitle,
@@ -139,7 +139,7 @@ function Explore(props) {
 
   return (
     <div>
-      {videoURL != "" ? (
+      {videoURL !== "" ? (
         <div id="youtubeVideo">
           <iframe
             width="560"

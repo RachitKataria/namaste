@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SavedCard from "./SavedCard";
 import FilterBar from "./FilterBar";
 import { observer, inject } from "mobx-react";

@@ -1,7 +1,6 @@
 import React from "react";
 import Tag from "./Tag";
 import heartFilled from "./img/heart-filled.png";
-import heartEmpty from "./img/heart-empty.png";
 import { observer, inject } from "mobx-react";
 import { toggleSave } from "./Utils";
 
@@ -24,7 +23,6 @@ function SavedCard(props) {
   } = props.store;
   const videoId = props.videoId;
   const videoData = props.videoData;
-  const liked = props.liked;
   const onClick = props.onClick;
 
   const savedTagsToDisplayTags = new Map();
