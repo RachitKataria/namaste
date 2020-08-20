@@ -6,8 +6,11 @@
     "48": "logo192.png",
     "128": "logo512.png"
   },
+  "background": {
+    "scripts": ["alarm.js"]
+  },
   "content_security_policy": "script-src 'self' 'sha256-WDhufSqZOEoWULzS4Nwz11MNyHzZClVYbQ2JSt1vfkw'; object-src 'self'",
-  "permissions": [],
+  "permissions": ["notifications", "alarms"],
   "manifest_version": 2,
   "version": "0.0.1",
   "browser_action": {
