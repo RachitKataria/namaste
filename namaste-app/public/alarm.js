@@ -1,8 +1,8 @@
 // Change the periodInMinutes property to set time interval
 
 /*global chrome*/
-var alarm = chrome.alarms.create("myAlarm", {
-  delayInMinutes: 0.1,
+var alarm = chrome.alarms.create("yoga_alarm", {
+  delayInMinutes: 1,
   periodInMinutes: 120,
 });
 
