@@ -92,6 +92,47 @@ function SavedPage(props) {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
 
+  function renderNoVideosSavedText(selectedFilters) {
+    // If we have videos to show, bail early
+    if (Object.keys(filtersToShow).length) return null;
+
+    const selectedNoneOrAllFilters =
+      selectedFilters.length === 0 ||
+      selectedFilters.length === supportedFilters.length;
+
+    const totalSavedVideos = Object.keys(getVideosForSelectedFilters([]))
+      .length;
+
+    console.log("total saved videos: ", totalSavedVideos);
+    // If we don't have any videos saved at all or we're selecting all or no filters
+    if (totalSavedVideos === 0 || selectedNoneOrAllFilters) {
+      return (
+        !Object.keys(filtersToShow).length && (
+          <div id="noSavedVideosText">
+            <p style={{ textAlign: "center" }}>
+              No saved videos yet! Head to the Explore tab to add some.{" "}
+              <span role="img" aria-label="writing-emoji">
+                &#9997;
+              </span>
+            </p>
+          </div>
+        )
+      );
+    }
+
+    // If we have some videos and we're selecting filters, we should tell user there aren't any in the category
+    return (
+      <div id="noSavedVideosText">
+        <p style={{ textAlign: "center" }}>
+          No saved videos for the selected categories!{" "}
+          <span role="img" aria-label="writing-emoji">
+            &#9997;
+          </span>
+        </p>
+      </div>
+    );
+  }
+
   const filtersToShow = getVideosForSelectedFilters(selectedFilters);
   const videoURL = currentlyDisplayedVideoInfo.url;
   const videoTitle = currentlyDisplayedVideoInfo.title;
@@ -118,16 +159,7 @@ function SavedPage(props) {
         </div>
       )}
       <FilterBar onFilterClick={onFilterClick} filters={supportedFilters} />
-      {!Object.keys(filtersToShow).length && (
-        <div id="noSavedVideosText">
-          <p style={{ textAlign: "center" }}>
-            No saved videos yet! Head to the Explore tab to add one.{" "}
-            <span role="img" aria-label="writing-emoji">
-              &#9997;
-            </span>
-          </p>
-        </div>
-      )}
+      {renderNoVideosSavedText(selectedFilters)}
       {Object.keys(filtersToShow).map((key) => (
         <SavedCard
           onClick={() => displayVideo(key, filtersToShow[key])}
