@@ -20,6 +20,8 @@ function Explore(props) {
   } = props.store;
 
   const [loadingVideo, setLoadingVideo] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+
   const defaultTitle = "Select";
   const [videoThumbnail, setVideoThumbnail] = React.useState("");
 
@@ -89,10 +91,10 @@ function Explore(props) {
       setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
-
-      const videoIsSaved = savedVideos.has(videoData.id.videoId);
-      setSaved(videoIsSaved);
+      setIsError(false);
     } else {
+      setVideoURL("");
+      setIsError(true);
       console.log("Response unsuccessful");
     }
   }
@@ -102,15 +104,12 @@ function Explore(props) {
   }
 
   function toggleImage() {
-    const updatedSaved = !isSaved;
-    setSaved(updatedSaved);
-
     const {
       savedVideosUpdated,
       videosToMetadataUpdated,
       tagsToVideosUpdated,
     } = toggleSave(
-      updatedSaved,
+      !isSaved,
       savedVideos,
       videosToMetadata,
       tagsToVideos,
@@ -173,7 +172,16 @@ function Explore(props) {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : isError ? (
+        <div>
+          <p style={{ textAlign: "center" }}>
+            Sorry, something went wrong. Please try again in a few hours!
+            &#8987;
+          </p>
+        </div>
+      ) : (
+        <div />
+      )}
       <div>
         <div>
           <div id="body_region">
