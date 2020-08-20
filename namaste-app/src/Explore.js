@@ -174,7 +174,7 @@ function Explore(props) {
       ) : isError ? (
         <div>
           <p style={{ textAlign: "center" }}>
-            Sorry, something went wrong. Please try again in a few hours!{" "}
+            Sorry, something went wrong. Please try again later!{" "}
             <span role="img" aria-label="writing-emoji">
               &#8987;
             </span>
