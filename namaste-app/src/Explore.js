@@ -69,7 +69,7 @@ function Explore(props) {
         type: "video",
         videoDuration: videoDurationTitle,
         videoEmbeddable: "true",
-        key: "AIzaSyAO1kbN2GO_cSg0QbeD3cPlcLxM_d13LWw",
+        key: process.env.REACT_APP_YOUTUBE_API_KEY,
       },
     });
 
