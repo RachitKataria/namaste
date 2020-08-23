@@ -172,7 +172,7 @@ function Explore(props) {
             <div
               className="spinner-border m-4"
               role="status"
-              style={{ color: "#d05e18" }}
+              style={{ color: "#e15503" }}
             >
               <span className="sr-only">Loading...</span>
             </div>
