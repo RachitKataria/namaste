@@ -50,7 +50,7 @@ function HomePage(props) {
   return (
     <div className="page">
       <div style={{ textAlign: "center" }}>
-        <img src={namasteLogo} alt="logo" width="90" height="90" />
+        <img src={namasteLogo} alt="logo" width="80" height="80" />
         <h1>NAMASTE</h1>
       </div>
       <div>
