@@ -2,9 +2,9 @@
   "short_name": "Namaste",
   "name": "Namaste",
   "icons": {
-    "16": "namaste-logo-transparent.png",
-    "48": "namaste-logo-transparent.png",
-    "128": "namaste-logo-transparent.png"
+    "16": "namaste-logo-rounded.png",
+    "48": "namaste-logo-rounded.png",
+    "128": "namaste-logo-rounded.png"
   },
   "background": {
     "scripts": ["alarm.js"]
