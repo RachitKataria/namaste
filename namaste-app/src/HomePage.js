@@ -7,6 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import Explore from "./Explore";
 import SavedPage from "./SavedPage";
+import namasteLogo from "./img/namaste-logo-transparent.png";
 
 function HomePage(props) {
   const [activeTab, setActiveTab] = React.useState("explore");
@@ -49,6 +50,7 @@ function HomePage(props) {
   return (
     <div className="page">
       <div style={{ textAlign: "center" }}>
+        <img src={namasteLogo} alt="logo" width="90" height="90" />
         <h1>NAMASTE</h1>
       </div>
       <div>
