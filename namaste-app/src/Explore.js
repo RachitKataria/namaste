@@ -86,7 +86,11 @@ function Explore(props) {
 
       // Set thumbnail
       setVideoThumbnail(videoData.snippet.thumbnails.default.url);
-      setVideoURL("https://www.youtube.com/embed/" + videoData.id.videoId);
+      setVideoURL(
+        "https://www.youtube.com/embed/" +
+          videoData.id.videoId +
+          "?enablejsapi=1"
+      );
       setVideoTitle(unEntity(videoData.snippet.title));
       setVideoChannel(videoData.snippet.channelTitle);
       setIsError(false);
@@ -140,7 +144,7 @@ function Explore(props) {
   return (
     <div>
       {videoURL !== "" ? (
-        <div id="youtubeVideo">
+        <div class="youtubeVideo">
           <iframe
             width="560"
             height="315"

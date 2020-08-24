@@ -47,6 +47,23 @@ function HomePage(props) {
     }
   };
 
+  const changedTab = (tabName) => {
+    // Set active tab name
+    setActiveTab(tabName);
+
+    // Pause videos
+    const videos = document.querySelectorAll(".youtubeVideo");
+    videos.forEach(function (video) {
+      const iframe = video.querySelector("iframe");
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: "stopVideo" }),
+          "*"
+        );
+      }
+    });
+  };
+
   return (
     <div className="page">
       <div style={{ textAlign: "center" }}>
@@ -61,7 +78,7 @@ function HomePage(props) {
                 <Nav.Item>
                   <Nav.Link
                     eventKey="explore"
-                    onClick={() => setActiveTab("explore")}
+                    onClick={() => changedTab("explore")}
                     style={getLinkStyle("explore")}
                   >
                     EXPLORE
@@ -75,7 +92,7 @@ function HomePage(props) {
                 <Nav.Item>
                   <Nav.Link
                     eventKey="saved"
-                    onClick={() => setActiveTab("saved")}
+                    onClick={() => changedTab("saved")}
                     style={getLinkStyle("saved")}
                   >
                     SAVED

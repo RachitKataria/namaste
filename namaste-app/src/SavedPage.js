@@ -84,7 +84,7 @@ function SavedPage(props) {
         id: videoId,
         title: videoData.name,
         channelName: videoData.channelName,
-        url: "https://www.youtube.com/embed/" + videoId,
+        url: "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1",
       });
     }
 
@@ -140,7 +140,7 @@ function SavedPage(props) {
   return (
     <div id="savedPage">
       {videoURL && (
-        <div id="youtubeVideo">
+        <div class="youtubeVideo">
           <iframe
             width="560"
             height="315"
